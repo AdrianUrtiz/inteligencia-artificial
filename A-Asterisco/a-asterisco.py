@@ -2,7 +2,7 @@ import pygame
 import math
 from queue import PriorityQueue
 
-WIDTH = 800
+WIDTH = 1000
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
 pygame.display.set_caption("A* Path Finding Algorithm")
 
@@ -85,6 +85,18 @@ class Spot:
         if self.col > 0 and not grid[self.row][self.col - 1].is_barrier():  # LEFT
             self.neighbors.append(grid[self.row][self.col - 1])
 
+        # Diagonal neighbors
+        if self.row > 0 and self.col > 0 and not grid[self.row - 1][self.col - 1].is_barrier():  # UPPER LEFT
+            self.neighbors.append(grid[self.row - 1][self.col - 1])
+
+        if self.row > 0 and self.col < self.total_rows - 1 and not grid[self.row - 1][self.col + 1].is_barrier():  # UPPER RIGHT
+            self.neighbors.append(grid[self.row - 1][self.col + 1])
+
+        if self.row < self.total_rows - 1 and self.col > 0 and not grid[self.row + 1][self.col - 1].is_barrier():  # BOTTOM LEFT
+            self.neighbors.append(grid[self.row + 1][self.col - 1])
+
+        if self.row < self.total_rows - 1 and self.col < self.total_rows - 1 and not grid[self.row + 1][self.col + 1].is_barrier():  # BOTTOM RIGHT
+            self.neighbors.append(grid[self.row + 1][self.col + 1])
     def __lt__(self, other):
         return False
 
@@ -133,7 +145,9 @@ def algorithm(draw, grid, start, end):
             if temp_g_score < g_score[neighbor]:
                 came_from[neighbor] = current
                 g_score[neighbor] = temp_g_score
-                f_score[neighbor] = temp_g_score + h(neighbor.get_pos(), end.get_pos())
+                heuristic = h(neighbor.get_pos(), end.get_pos())
+                f_score[neighbor] = temp_g_score + heuristic
+                print(f"g_score({current.get_pos()} -> {neighbor.get_pos()}): {temp_g_score}, h({neighbor.get_pos()} -> {end.get_pos()}): {heuristic}, f_score: {f_score[neighbor]}")  # print g_score, heuristic and f_score
                 if neighbor not in open_set_hash:
                     count += 1
                     open_set.put((f_score[neighbor], count, neighbor))
@@ -190,7 +204,7 @@ def get_clicked_pos(pos, rows, width):
 
 
 def main(win, width):
-    ROWS = 50
+    ROWS = 30
     grid = make_grid(ROWS, width)
 
     start = None

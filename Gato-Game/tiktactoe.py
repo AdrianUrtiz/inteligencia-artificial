@@ -1,11 +1,5 @@
 import random
 import math
-import os
-
-
-# X is max = 1
-# O in min = -1
-
 class TicTacToe:
     def __init__(self):
         self.board = ['-' for _ in range(9)]
@@ -39,19 +33,17 @@ class TicTacToe:
 
     def checkWinner(self):
         if self.is_player_win(self.board, self.humanPLayer):
-            os.system("cls")
             print(f"   Player {self.humanPLayer} wins the game!")
             return True
 
         if self.is_player_win(self.board, self.botPlayer):
-            os.system("cls")
-            print(f"   Player {self.botPlayer} wins the game!")
+            print(f"   El jugador {self.botPlayer} gana!")
             return True
 
         # checking whether the game is draw or not
         if self.is_board_filled(self.board):
-            os.system("cls")
-            print("   Match Draw!")
+
+            print("   Has empatado!")
             return True
         return False
 
@@ -59,8 +51,7 @@ class TicTacToe:
         bot = ComputerPlayer(self.botPlayer)
         human = humanPLayer(self.humanPLayer)
         while True:
-            os.system("cls")
-            print(f"   Player {self.humanPLayer} turn")
+            print(f"   Turno del jugador {self.humanPLayer} ")
             self.show_board()
 
             # Human
@@ -87,7 +78,7 @@ class humanPLayer:
     def human_move(self, state):
         # taking user input
         while True:
-            square = int(input("Enter the square to fix spot(1-9): "))
+            square = int(input("Ingresa un número del (1-9) para seleccionar una casilla: "))
             print()
             if state[square - 1] == "-":
                 break
@@ -151,6 +142,9 @@ class ComputerPlayer(TicTacToe):
             sim_score = self.minimax(newState, other_player)  # simulate a game after making that move
 
             sim_score['position'] = possible_move  # this represents the move optimal next move
+
+            # Print the min-max value for this move
+            print(f"Min-max value for move {possible_move}: {sim_score['score']}")
 
             if player == max_player:  # X is max player
                 if sim_score['score'] > best['score']:
