@@ -6,16 +6,16 @@ WIDTH = 1000
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
 pygame.display.set_caption("A* Path Finding Algorithm")
 
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 255, 0)
-YELLOW = (255, 255, 0)
+RED = (255, 105, 97)
+GREEN = (119, 221, 119)
+BLUE = (174, 198, 207)
+YELLOW = (255, 179, 71)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 PURPLE = (128, 0, 128)
-ORANGE = (255, 165, 0)
-GREY = (128, 128, 128)
-TURQUOISE = (64, 224, 208)
+ORANGE = (255, 179, 71)
+GREY = (220, 220, 220)
+TURQUOISE = (132, 195, 223)
 
 
 class Spot:
