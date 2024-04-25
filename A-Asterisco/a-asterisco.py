@@ -4,7 +4,7 @@ from queue import PriorityQueue
 
 WIDTH = 1000
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
-pygame.display.set_caption("A* Path Finding Algorithm")
+pygame.display.set_caption("A* Algoritmo de Busqueda de Caminos")
 
 RED = (255, 105, 97)
 GREEN = (119, 221, 119)
@@ -204,7 +204,7 @@ def get_clicked_pos(pos, rows, width):
 
 
 def main(win, width):
-    ROWS = 30
+    ROWS = 15
     grid = make_grid(ROWS, width)
 
     start = None
