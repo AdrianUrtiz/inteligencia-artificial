@@ -2,7 +2,7 @@ import pygame
 import math
 from queue import PriorityQueue
 
-WIDTH = 1000
+WIDTH = 600
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
 pygame.display.set_caption("A* Algoritmo de Busqueda de Caminos")
 
@@ -204,7 +204,7 @@ def get_clicked_pos(pos, rows, width):
 
 
 def main(win, width):
-    ROWS = 15
+    ROWS = 40
     grid = make_grid(ROWS, width)
 
     start = None
